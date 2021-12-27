@@ -1,0 +1,231 @@
+.clientMain {
+  padding: 30px;
+  background: #fff;
+  margin: 8rem auto 30px;
+  height: 100%;
+  width:90%;
+}
+.app-content h3 {
+  font-size: 20px;
+  font-weight: 800;
+}
+.app-content p {
+  font-size: 14px;
+}
+.trip {
+  display: flex;
+  width: 100%;
+  align-items:baseline;
+}
+.tripObj {
+  width: 30%;
+}
+.tripcap {
+  display: flex;
+  align-items: center;
+  margin: 30px auto;
+}
+.tripcap h1 {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  background: #efefef;
+  border-radius: 50%;
+  display: flex;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.tripcap span {
+  width: 60%;
+}
+.tripform1 {
+  width: 35%;
+  padding: 20px;
+}
+.tripform2 {
+  width: 35%;
+  padding: 20px;
+}
+.select {
+  margin: 30px auto;
+  display: grid;
+}
+.select label {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 25px 0px;
+}
+select {
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 10px;
+  width: 100%;
+}
+input {
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 10px;
+}
+.active {
+  color: #2da8a0;
+}
+.active h1 {
+  border: 1px solid #2da8a0;
+  background: transparent;
+}
+i.fas.fa-check {
+  width: 30px;
+  height: 30px;
+  background: #2da8a0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 200;
+  margin-right:10px;
+}
+.selectbutton {
+  border: 1px solid #d8d8d8;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+}
+.prevtab2 {
+  border: 1px solid #f75940;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
+  width: 20%;
+  padding: 13px;
+  color: #f75940;
+  margin-right: 3px;
+}
+
+.prevtab2:hover {
+  border: 1px solid #f75940;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  /* identical to box height */
+  width: 20%;
+  padding: 13px;
+  color: #f75940;
+  margin-right: 3px;
+}
+.nexttab {
+  padding: 13px;
+  background: #f75940;
+  border: 1px solid #f75940;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  width: 18%;
+  /* identical to box height */
+
+  color: #ffffff;
+}
+
+.nexttab:hover {
+  padding: 13px;
+  background: #f75940;
+  border: 1px solid #f75940;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  width: 18%;
+  /* identical to box height */
+
+  color: #ffffff;
+}
+
+button {
+  display: flex;
+  padding: 8px 45px;
+  background: #f75940;
+  color: #fff;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+}
+.tripForm {
+  width: 70%;
+  margin: auto;
+}
+.socialForm h4 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+.appLink label {
+  margin: 20px;
+  font-weight: bold;
+}
+.appLink span {
+  color: #2da8a0;
+  float: right;
+  margin: 20px auto;
+}
+.socialLink {
+  margin-top: 3em;
+}
+.socialLink p {
+  font-size: 18px;
+  font-weight: bold;
+}
+.mainlink {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+}
+.mainlink span {
+  margin-left: 10px;
+}
+
+@media (max-width: 940px) {
+  .clientMain {
+    height: 100%;
+  }
+  .trip {
+    flex-direction: column;
+  }
+  .tripObj {
+    display: flex;
+    width: 100%;
+  }
+  .tripcap {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .tripcap span {
+    width: 100%;
+  }
+  .tripcap h1 {
+    margin: 10px auto;
+  }
+  .tripform1 {
+    width: 100%;
+  }
+  .tripform2 {
+    width: 100%;
+  }
+}
