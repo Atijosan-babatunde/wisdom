@@ -10,7 +10,6 @@ export default function SingleApplication({ history, location }) {
     }
 
     useEffect(() => {
-        console.log(location.state)
         var myModal = new window.bootstrap.Modal(document.getElementById('staticBackdrop'), {
             keyboard: false
         });

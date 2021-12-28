@@ -57,7 +57,7 @@ export default function GTable({ data, class: _Class, searchEl, history }) {
                 return iStart + " - " + iEnd + " of " + iMax;
             }
         });
-        instance.columns().header().to$().addClass("fw-bold fs-12 text-center text-uppercase py-3 ft-2")
+        instance && instance.columns().header().to$().addClass("fw-bold fs-12 text-center text-uppercase py-3 ft-2")
 
         function search() {
             instance.search(this.value).draw();
@@ -66,7 +66,7 @@ export default function GTable({ data, class: _Class, searchEl, history }) {
 
         return (() => {
             if (searchInstace) searchInstace.removeEventListener('keyup', search);
-            instance.destroy();
+            instance && instance.destroy();
         })
     });
 

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { HttpStatus } from '../../helpers/constants';
 import { useSessionStorage } from '../../hooks/useSessionStorage';
-// import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { getApplications } from '../../services/application';
 import { getCustomers } from '../../services/customers';
 import { getMerchantProfile } from '../../services/users';
@@ -17,6 +17,7 @@ export default function Landing({ history }) {
 	const [user, setUser] = useSessionStorage("user", {});
 	const [merchant, setMerchant] = useSessionStorage("merchant", {});
 	const [step, setStep] = useState(0)
+	const [showBanner, setShowBanner] = useLocalStorage("showBanner", "true");
 	// const [pageLoading, setPageLoading]
 	// const [showHint, setShowHint] = useLocalStorage("showHint", true);
 	// TODO: Change to Promise.all
@@ -66,9 +67,13 @@ export default function Landing({ history }) {
 			keyboard: false
 		});
 
-		myModal.show()
+		if (showBanner === "true") {
+			myModal.show();
+			setShowBanner("false");
+		}
 
 		return (() => {
+			console.log(showBanner)
 			myModal.hide();
 		})
 	}, [])

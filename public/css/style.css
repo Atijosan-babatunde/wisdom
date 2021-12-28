@@ -40,6 +40,14 @@
 .fw-600 {
   font-weight: 600;
 }
+
+.fixed-middle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .indicator {
   height: 3px;
   margin: 10px 0;

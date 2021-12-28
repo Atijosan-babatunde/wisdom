@@ -13,3 +13,4 @@ export { default as EmailVerification } from './EmailVerification';
 export { default as NotFound } from './NotFound';
 export { default as SingleApplication } from './SingleApplication';
 export { default as SocialAccount } from './SocialAccounts';
+export { default as Payout } from './Payout';

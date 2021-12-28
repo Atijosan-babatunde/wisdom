@@ -24,6 +24,7 @@ function Approuter({ history }) {
                 <PrivateRoute path='/customers/' component={Pages.Ticketed} />
                 <PrivateRoute path='/account/' exact component={Pages.Account} />
                 <PrivateRoute path='/faq/' exact component={Pages.Faq} />
+                <PrivateRoute path='/payouts/' exact component={Pages.Payout} />
 
                 <Route component={Pages.NotFound} />
             </Switch>

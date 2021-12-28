@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-export default function SocialAccount({ history }) {
-    const maxDate = new Date();
-    const [loading, setLoading] = useState(false);
-    const [endDate, setEndDate] = useState(null);
+
+export default function SocialAccount() {
+    const [loading ] = useState(false);
 
     useEffect(() => {
 
