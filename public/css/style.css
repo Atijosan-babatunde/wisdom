@@ -16,6 +16,10 @@
   width: 100%;
 }
 
+.resize-none{
+  resize: none;
+}
+
 .hover-dim {
   cursor: pointer;
   transition: background-color .3s ease;
@@ -509,6 +513,10 @@ table.dataTable.no-footer {
   border-color: #f75940 !important;
 }
 
+.rounded-10 {
+  border-radius: 10px !important;
+}
+
 .rounded-12 {
   border-radius: 12px !important;
 }
@@ -597,6 +605,10 @@ table.dataTable.no-footer {
   .top-tab .nav-link > span {
     padding: 10px 0px;
   }
+}
+
+.no-drop-icon.dropdown-toggle::after {
+  display: none;
 }
 
 .top-tab .nav-link.active > span {

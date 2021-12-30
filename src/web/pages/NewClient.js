@@ -263,30 +263,29 @@ function TripDetails({ onNext }) {
 					</select>
 				</div>}
 			</div>
-			<div className="row mb-4">
-				{bookingType === "flight" &&
-					<Fragment>
-						<div className="col-md-6">
-							<label htmlFor="inputCountry" className="form-label fw-bold">FROM</label>
-							<select name="fromIataCode" defaultValue="" className="select2 form-select form-select-0 ps-3 py-3 text-light text-dark" required>
-								<option value="" disabled>Select City</option>
-								{airports && airports.map((v) => {
-									return <option key={v.icao_code} value={v.iata_code}>{v.name}</option>
-								})}
-							</select>
-						</div>
-						<div className="col-md-6">
-							<label htmlFor="inputCountry" className="form-label fw-bold">TO</label>
-							<select name="toIataCode" id="inputCity" className="form-select form-select-0 ps-3 py-3 text-light text-dark" required>
-								<option>Select City</option>
-								{airports && airports.map((v) => {
-									return <option key={v.icao_code} value={v.iata_code}>{v.name}</option>
-								})}
-							</select>
-						</div>
-					</Fragment>
-				}
-			</div>
+
+			{bookingType === "flight" &&
+				<div className="row mb-4">
+					<div className="col-md-6">
+						<label htmlFor="inputCountry" className="form-label fw-bold">FROM</label>
+						<select name="fromIataCode" defaultValue="" className="select2 form-select form-select-0 ps-3 py-3 text-light text-dark" required>
+							<option value="" disabled>Select City</option>
+							{airports && airports.map((v) => {
+								return <option key={v.icao_code} value={v.iata_code}>{v.name}</option>
+							})}
+						</select>
+					</div>
+					<div className="col-md-6">
+						<label htmlFor="inputCountry" className="form-label fw-bold">TO</label>
+						<select name="toIataCode" id="inputCity" className="form-select form-select-0 ps-3 py-3 text-light text-dark" required>
+							<option>Select City</option>
+							{airports && airports.map((v) => {
+								return <option key={v.icao_code} value={v.iata_code}>{v.name}</option>
+							})}
+						</select>
+					</div>
+				</div>
+			}
 
 			<div className="row mb-4">
 				{bookingType === "flight" &&
@@ -333,11 +332,17 @@ function TripDetails({ onNext }) {
 					<Fragment>
 						<div className="col-md-12 mb-4">
 							<label htmlFor="inputCountry" className="form-label fw-bold">PACKAGE DESCRIPTION</label>
-							<input name="description" type="text" className="form-control form-control-0 ps-3 py-3" placeholder="Tell use more about the package" required />
+							<textarea rows="3" name="description" type="text" className="resize-none form-control form-control-0 ps-3 py-3" placeholder="Tell use more about the package" required></textarea>
 						</div>
 						<div className="col-md-12">
-							<label htmlFor="inputCountry" className="form-label fw-bold">DESTINATIONS</label>
-							<input name="destinations" type="text" className="form-control form-control-0 ps-3 py-3" placeholder="Enter list of destinations" required />
+							<label htmlFor="inputCountry" className="form-label fw-bold">DESTINATION</label>
+							<input name="destinations" type="text" className="form-control form-control-0 ps-3 py-3 mb-1" placeholder="Enter destination" required />
+							<div className="text-end">
+								<button className="btn btn-transparent text-theme ft-2 fs-12 fw-600">
+									<i className="fa-solid fa-plus"></i>
+									<span>&nbsp;Add Destination</span>
+								</button>
+							</div>
 						</div>
 					</Fragment>
 				}
@@ -368,13 +373,23 @@ function TripDetails({ onNext }) {
 						</div>
 						<div className="col-md-6 mb-4">
 							<label htmlFor="inputPhone" className="form-label">DURATION OF STAY</label>
-							<div className="input-group mb-3">
-								<input name="duration" type="text" className="form-control form-control-0 ps-3 py-3" id="inputPhone" placeholder="Enter a number" required />
-								<select name="durationType" defaultValue="NG" className="form-select form-select-0 text-light text-dark">
+
+							{/* <select name="durationType" defaultValue="NG" className="form-select form-select-0 text-light text-dark">
 									<option value="days">Days</option>
 									<option value="weeks">Weeks</option>
 									<option value="months">Months</option>
-								</select>
+								</select> */}
+							<div className="input-group mb-3">
+
+								<input name="duration" type="text" className="form-control form-control-0 ps-3 py-3 border-end-0" id="inputPhone" placeholder="Enter a number" required />
+
+								<button className="btn border border-start-0 dropdown-toggle form-select-0 fs-14" id="durationType" type="button" data-bs-toggle="dropdown" aria-expanded="false">Days </button>
+								<ul className="dropdown-menu">
+									<li data-value="days" className="dropdown-item fs-14">Days </li>
+									<li data-value="weeks" className="dropdown-item fs-14">Weeks</li>
+									<li data-value="months" className="dropdown-item fs-14">Months</li>
+								</ul>
+								{/* <input type="text" name="phone" className="form-control form-control-0 ps-3 py-3 border-start-0" placeholder="Enter your phone number" required /> */}
 							</div>
 						</div>
 					</Fragment>}
@@ -433,6 +448,8 @@ const NewClient = () => {
 				cogoToast.success(re.message, { position: 'top-right', hideAfter: 5 })
 				setReference(re.payload.reference);
 				next();
+			} else if (re.status === "CONFLICT") {
+				cogoToast.error("Phone number already associated with another account", { position: 'top-right', hideAfter: 5 })
 			}
 		}).catch((e) => {
 			console.log(e)

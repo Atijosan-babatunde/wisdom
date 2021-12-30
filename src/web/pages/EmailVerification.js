@@ -54,6 +54,7 @@ export default function EmailVerification({ history, location }) {
 			console.log(e)
 			if (e.status === "OK") {
 				window && window.localStorage && window.localStorage.removeItem("__v");
+				window && window.localStorage && window.localStorage.removeItem("showBanner");
 				window && window.localStorage && window.localStorage.setItem("user", JSON.stringify(e.payload.user));
 				window && window.localStorage && window.localStorage.setItem("merchant", JSON.stringify(e.payload.merchant));
 				history.push("/business-information/")

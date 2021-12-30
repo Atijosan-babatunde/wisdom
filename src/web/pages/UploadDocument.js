@@ -139,7 +139,7 @@ export default function UploadDocument({ history, location }) {
 
 							<div className="row">
 								<div className="col-12 text-end">
-									<Link className="text-dark me-5 fw-600 ft-2 fs-14" to="/social-profile/">Do This Later</Link>
+									<Link className="text-dark me-5 fw-600 ft-2 fs-14" to="/bank-information/">Do This Later</Link>
 									<button type="submit" className="btn btn-theme py-3 px-5 rounded-12" disabled={loading}>{
 										loading ?
 											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Next"

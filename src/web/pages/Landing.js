@@ -76,7 +76,7 @@ export default function Landing({ history }) {
 			console.log(showBanner)
 			myModal.hide();
 		})
-	}, [])
+	})
 
 	// useEffect(() => {
 	// 	introJs({

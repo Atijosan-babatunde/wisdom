@@ -125,7 +125,7 @@ export default function EnterAccountDetails({ history }) {
 									<Link className="text-dark me-5 fw-600 ft-2 fs-14" to="/social-profile/">Do This Later</Link>
 									<button type="submit" className="btn btn-theme py-3 px-5 rounded-12" disabled={loading}>{
 										loading ?
-											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Finish"
+											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Continue"
 									}</button>
 								</div>
 							</div>

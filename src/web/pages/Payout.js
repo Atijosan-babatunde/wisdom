@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BaseContainer } from '../layouts/Containers';
-import GTable, { ApplicationsClass } from '../component/GTable';
-import { getApplications } from '../../services/application';
+import GTable, { TransactionsClass } from '../component/GTable';
+import { getTransactions } from '../../services/transactions';
 
 const Payout = ({ history }) => {
 	const searchRef = useRef(null);
-	const [applications, setApplications] = useState([]);
+	const [transactions, setTransactions] = useState([]);
 
 	useEffect(() => {
-		getApplications().then((e) => {
+		getTransactions().then((e) => {
 			console.log(e)
-			setApplications(e.payload)
+			setTransactions(e.payload)
 		}).catch((ex) => {
 			console.log(ex)
 		})
@@ -46,7 +46,7 @@ const Payout = ({ history }) => {
 									</div>
 								</div>
 								<div className="card-body">
-									<GTable data={applications} searchEl={searchRef} class={ApplicationsClass} history={history} />
+									<GTable data={transactions} searchEl={searchRef} class={TransactionsClass} history={history} />
 								</div>
 							</div>
 						</div>
