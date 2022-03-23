@@ -2,12 +2,14 @@ import cogoToast from 'cogo-toast';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createBusiness } from '../../services/verification';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
 
 export default function UploadDocument({ history, location }) {
 	const [loading, setLoading] = useState(false);
 	const [uploadActive, setUploadActive] = useState(false);
 	const [file, setFile] = useState(null);
 	const [progress, setProgress] = useState(0)
+	const [merchant, setMerchant] = useSessionStorage("merchant", {});
 
 	function uploadDocument(e) {
 		if (e.target.files.length > 0 && e.target.files.length === 1) {
@@ -74,6 +76,8 @@ export default function UploadDocument({ history, location }) {
 			if (data.status === "OK") {
 				history.push("/bank-information/")
 			}
+
+			setMerchant(data.payload.merchant)
 		}).catch((err) => {
 			console.log(err)
 		}).finally(() => {
@@ -100,14 +104,14 @@ export default function UploadDocument({ history, location }) {
 							<div className="col mb-3">
 								<div className="input-group">
 									<span className="input-group-text input-group-text-0 "><i className="iconly-Work icli fs-22 border-end-0"></i></span>
-									<input type="text" placeholder="Business Name" className="form-control form-control-0 ps-3 py-3 border-start-0" name="business" required defaultValue={location?.state?.data?.merchant?.corporateName} />
+									<input type="text" placeholder="Business Name" className="form-control form-control-0 ps-3 py-3 border-start-0" name="business" defaultValue={merchant?.corporateName} />
 								</div>
 							</div>
 
 							<div className="col mb-5">
 								<div className="input-group">
 									<span className="input-group-text input-group-text-0 "><i className="iconly-Work icli fs-22 border-end-0"></i></span>
-									<input type="text" placeholder="RC Number" className="form-control form-control-0 ps-3 py-3 border-start-0" name="rcnumber" required defaultValue={location?.state?.data?.merchant?.rcnumber} />
+									<input type="text" placeholder="RC Number" className="form-control form-control-0 ps-3 py-3 border-start-0" name="rcnumber" defaultValue={merchant?.rcnumber} />
 								</div>
 							</div>
 

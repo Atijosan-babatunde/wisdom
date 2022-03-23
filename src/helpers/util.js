@@ -1,12 +1,10 @@
 const data = require('../resources/province.json');
 
-export const formatCurrency = (number, options) => {
-    return number && number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+export const formatCurrency = (number, fixed = 2) => {
+    return number && number.toString().replace(/B(?=(d{3})+(?!d))/g, ',');
 }
 
 export const isNullOrEmpty = (text) => {
-    console.log(text)
-    console.log(text === null || text === "" || text?.trim() === "");
     return text === null || text === "" || text?.trim() === "" || text === undefined;
 }
 

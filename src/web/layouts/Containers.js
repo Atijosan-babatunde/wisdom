@@ -1,9 +1,10 @@
 import React from 'react';
 import * as Nav from './Navigations';
 import { Link } from 'react-router-dom';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
 
 export const BaseContainer = ({ children, loading, error }) => {
-
+    const [merchant] = useSessionStorage("merchant", {});
     // useEffect(() => {
     //     var ele =  document.getElementById("nav-icon3");
     //     ele.addEventListener('click', function(){
@@ -56,7 +57,7 @@ export const BaseContainer = ({ children, loading, error }) => {
                                 <div>
                                     <div className="navbar-nav ms-auto">
                                         <Link to="/account/" className="nav-item nav-link">
-                                            <img src="/img/account.svg" alt="account" />
+                                            <img src={merchant?.logo || '/img/user-286.png'} className="rounded-circle" height="45" width="45" alt="account" />
                                         </Link>
                                     </div>
                                 </div>

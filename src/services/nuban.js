@@ -38,6 +38,25 @@ export const getSupportedNubans = () => {
     })
 }
 
+export const resolveNuban = (req) => {
+    return new Promise((resolve, reject) => {
+        return fetch(`${process.env.REACT_APP_BASE_API}/miscellaneous/resolve-account-number/`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(req)
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            resolve(data);
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
+
 export const addNuban = (req) => {
     return new Promise((resolve, reject) => {
         return fetch(`${process.env.REACT_APP_BASE_API}/nuban/`, {

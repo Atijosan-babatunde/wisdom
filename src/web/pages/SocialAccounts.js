@@ -1,16 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import cogoToast from 'cogo-toast';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HttpStatus } from '../../helpers/constants';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
+import { updateMerchant } from '../../services/merchsnts';
 
-export default function SocialAccount() {
-    const [loading ] = useState(false);
-
-    useEffect(() => {
-
-    }, []);
+export default function SocialAccount({ history }) {
+    const [loading, setLoading] = useState(false);
+    const [merchant, setMerchant] = useSessionStorage("merchant", {});
 
     function submit(e) {
         e.preventDefault();
-
+        setLoading(true)
+		const payload = Object.fromEntries(new FormData(e.target));
+		console.log(payload)
+		updateMerchant(payload).then((re) => {
+			if (re.status === HttpStatus.OK) {
+				// update merchant
+				// remove verification banner if verified
+				setMerchant(re.payload.merchant)
+                history.push("/dashboard/")
+			} else {
+				cogoToast.error(re.message)
+			}
+		}).catch((e) => {
+			console.log(e)
+		}).finally(() => {
+			setLoading(false)
+			// Stop loader
+		})
     }
 
     return (
@@ -32,21 +50,28 @@ export default function SocialAccount() {
                             <div className="col mb-3">
                                 <div className="input-group">
                                     <span className="input-group-text input-group-text-0 fs-22"><i className="fa-brands fa-facebook-f fs-18 border-end-0"></i></span>
-                                    <input type="text" placeholder="https://www.facebook.com/" className="form-control form-control-0 ps-3 py-3 border-start-0" name="facebook" />
+                                    <input type="text" placeholder="https://www.facebook.com/" defaultValue={merchant?.facebook} className="form-control form-control-0 ps-3 py-3 border-start-0" name="facebook" />
                                 </div>
                             </div>
 
                             <div className="col mb-3">
                                 <div className="input-group">
                                     <span className="input-group-text input-group-text-0 fs-22"><i className="fa-brands fa-twitter fs-18 border-end-0"></i></span>
-                                    <input type="text" placeholder="https://www.twitter.com/" className="form-control form-control-0 ps-3 py-3 border-start-0" name="twitter" />
+                                    <input type="text" placeholder="https://www.twitter.com/" defaultValue={merchant?.twitter} className="form-control form-control-0 ps-3 py-3 border-start-0" name="twitter" />
+                                </div>
+                            </div>
+
+                            <div className="col mb-3">
+                                <div className="input-group">
+                                    <span className="input-group-text input-group-text-0 fs-22"><i className="fa-brands fa-instagram fs-18 border-end-0"></i></span>
+                                    <input type="text" placeholder="https://www.instagram.com/" defaultValue={merchant?.instagramBusiness} className="form-control form-control-0 ps-3 py-3 border-start-0" name="instagram" />
                                 </div>
                             </div>
 
                             <div className="col mb-5">
                                 <div className="input-group">
                                     <span className="input-group-text input-group-text-0 fs-22"><i className="fa-brands fa-linkedin fs-18 border-end-0"></i></span>
-                                    <input type="text" placeholder="https://www.linkedin.com/in/" className="form-control form-control-0 ps-3 py-3 border-start-0" name="linkedin" />
+                                    <input type="text" placeholder="https://www.linkedin.com/in/" defaultValue={merchant?.linkedin} className="form-control form-control-0 ps-3 py-3 border-start-0" name="linkedin" />
                                 </div>
                             </div>
 

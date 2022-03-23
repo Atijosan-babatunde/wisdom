@@ -15,3 +15,6 @@ export { default as SingleApplication } from './SingleApplication';
 export { default as SocialAccount } from './SocialAccounts';
 export { default as Payout } from './Payout';
 export { default as ResetPassword } from './ResetPassword';
+export { default as VerifyPhone } from './VerifyPhone';
+export { default as AddBank } from './AddBank';
+export { default as Campaigns } from './Campaigns';
