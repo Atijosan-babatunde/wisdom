@@ -8,17 +8,22 @@ import cogoToast from 'cogo-toast';
 export default function EnterAccountDetails({ history }) {
 	const maxDate = new Date();
 	const [loading, setLoading] = useState(false);
+	const [fetchLoading, setFetchLoading] = useState(false);
 	const [banks, setBanks] = useState([]);
 	const [endDate, setEndDate] = useState(null);
 
 	useEffect(() => {
 		// CSS HACK
+		setFetchLoading(true);
 		document.querySelector(".react-datepicker__input-container").parentElement.style.width = "88%"
 		getSupportedNubans().then((res) => {
 			console.log(res)
 			setBanks(res.payload)
 		}).catch(() => {
 			console.log("Error")
+		}).finally(() => {
+			console.log("Finally")
+			setFetchLoading(false);
 		})
 	}, []);
 
@@ -52,10 +57,11 @@ export default function EnterAccountDetails({ history }) {
 				<div className="col-md-6 col-12 side-image d-none d-md-block"></div>
 				<div className="col-md-6 col-12 px-lg-5 align-self-center justify-content-center w-form-responsive mx-auto">
 					<div className="container">
+						<div className="text-center mb-5">
+							<img src="/img/logo.svg" alt="logo" width="130" />
+						</div>
+
 						<form onSubmit={submit}>
-							<div className="text-center mb-5">
-								<img src="/img/logo.svg" alt="logo" width="130" />
-							</div>
 
 							<div className="mb-3">
 								<h4 className="mb-1 fw-bold">Enter your account details</h4>
@@ -65,8 +71,8 @@ export default function EnterAccountDetails({ history }) {
 							<div className="col mb-3">
 								<div className="input-group">
 									<span className="input-group-text input-group-text-0 "><i className="iconly-Home icli fs-22 border-end-0"></i></span>
-									<select className="form-select form-select-0 ps-3 py-3 border-start-0" name="bank" required>
-										<option disabled value="">Select Bank</option>
+									<select className="form-select form-select-0 ps-3 py-3 border-start-0" defaultValue="" name="bank" required>
+										<option disabled selected>Select Bank</option>
 										{
 											banks && banks.map((v) => {
 												return <option key={v.id} value={v.code}>{v.name}</option>
@@ -93,7 +99,7 @@ export default function EnterAccountDetails({ history }) {
 							<div className="col mb-3">
 								<div className="input-group">
 									<span className="input-group-text input-group-text-0 fs-22"><i className="iconly-Shield-Done icli fs-22 border-end-0"></i></span>
-									<input type="text" pattern="^\d{11}$" placeholder="BVN" title="BVN must contain 9 digits only" className="form-control form-control-0 ps-3 py-3 border-start-0" name="bvn" required />
+									<input type="text" pattern="^\d{11}$" placeholder="BVN" title="BVN must contain 11 digits only" className="form-control form-control-0 ps-3 py-3 border-start-0" name="bvn" required />
 								</div>
 							</div>
 
@@ -123,9 +129,9 @@ export default function EnterAccountDetails({ history }) {
 							<div className="row">
 								<div className="col-12 text-end">
 									<Link className="text-dark me-5 fw-600 ft-2 fs-14" to="/social-profile/">Do This Later</Link>
-									<button type="submit" className="btn btn-theme py-3 px-5 rounded-12" disabled={loading}>{
+									<button type="submit" className="btn btn-theme py-3 px-5 rounded-12" disabled={loading || fetchLoading}>{
 										loading ?
-											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Finish"
+											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Continue"
 									}</button>
 								</div>
 							</div>

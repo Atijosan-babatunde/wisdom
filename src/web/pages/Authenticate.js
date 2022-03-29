@@ -114,7 +114,7 @@ export default function Authenticate({ history }) {
 							</div>
 						</form>
 						<div>
-							<p>Don't have an Agent Account?<Link to="/get-started/"> <span className="fw-bold fw-responsive text-theme">Create One Now</span></Link></p>
+							<p>Don't have an Agent Account?<Link to="/get-started/" transition={"glide-right"}> <span className="fw-bold fw-responsive text-theme">Create One Now</span></Link></p>
 						</div>
 					</div>
 				</div>

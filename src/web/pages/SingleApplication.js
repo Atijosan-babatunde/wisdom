@@ -10,7 +10,6 @@ export default function SingleApplication({ history, location }) {
     }
 
     useEffect(() => {
-        console.log(location.state)
         var myModal = new window.bootstrap.Modal(document.getElementById('staticBackdrop'), {
             keyboard: false
         });
@@ -33,12 +32,12 @@ export default function SingleApplication({ history, location }) {
     }
 
     const shareViaEMail = () => {
-		shareApplication(location.state.data.applicationReference, "email").then(() => {
-			cogoToast.success("Link shared via E-mail", { position: "top-right", hideAfter: 5 })
-		}).catch(() => {
-			cogoToast.error("Unable to share application", { position: 'top-right', hideAfter: 5 })
-		})
-	}
+        shareApplication(location.state.data.applicationReference, "email").then(() => {
+            cogoToast.success("Link shared via E-mail", { position: "top-right", hideAfter: 5 })
+        }).catch(() => {
+            cogoToast.error("Unable to share application", { position: 'top-right', hideAfter: 5 })
+        })
+    }
 
     return (
         <Fragment>
@@ -113,6 +112,35 @@ export default function SingleApplication({ history, location }) {
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* <div className="row">
+                                    <div className="col-lg-6">
+                                        <div className="row">
+                                            <p className="fs-12 mb-1 fw-bolder text-uppercase">Booking Details</p>
+                                        </div>
+                                        
+                                        <div className="row">
+                                        </div>
+                                    </div>
+
+                                    <div className="col-lg-6">
+                                        <div className="container">
+                                            <div className="row row-cols-2">
+                                                <p className="fs-14 fw-bold ft-3 mb-4">Ticket Fare</p>
+                                                <p className="fs-14 ft-3 mb-1">N{100}</p>
+                                                <p className="fs-14 fw-bold ft-3 mb-1">VAT</p>
+                                                <p className="fs-14 ft-3 mb-1">N0</p>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div className="container">
+                                            <div className="row row-cols-2">
+                                                <div className="fs-14 fw-bold ft-3">Total</div>
+                                                <div className="fs-20 ft-3 text-teal fw-600">N{100}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

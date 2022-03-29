@@ -1,18 +1,19 @@
 import React from 'react';
-import { Route, Switch, Router, Redirect } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import { fetchCookie } from '../helpers/cookie';
 import * as Pages from '../web/pages';
-
 import ConnectivityListener from './ConnectivityListener';
 
 
 function Approuter({ history }) {
     return (
         <Router history={history}>
+
             <Switch>
-                <SessionRoute pathRedirect={'/dashboard/'} exact path='/' component={Pages.Authenticate} />
-                <SessionRoute pathRedirect={'/dashboard/'} path='/forgot-password/' exact component={Pages.ForgetPass} />
-                <SessionRoute pathRedirect={'/dashboard/'} path='/get-started/' exact component={Pages.CreateAccount} />
+                <SessionRoute pathRedirect='/dashboard/' exact path='/' component={Pages.Authenticate} />
+                <SessionRoute pathRedirect='/dashboard/' path='/forgot-password/' exact component={Pages.ForgetPass} />
+                <SessionRoute pathRedirect='/dashboard/' path='/get-started/' exact component={Pages.CreateAccount} />
+                <SessionRoute pathRedirect='/dashboard/' path='/reset/:token/' exact component={Pages.ResetPassword} />
                 <SessionRoute pathRedirect='/business-information/' path='/verify-email/' exact component={Pages.EmailVerification} />
 
                 <PrivateRoute path='/business-information/' exact component={Pages.UploadDocument} />
@@ -22,16 +23,19 @@ function Approuter({ history }) {
                 <PrivateRoute path='/applications/' component={Pages.Client} />
                 <PrivateRoute path='/create-application/' exact component={Pages.NewClient} />
                 <PrivateRoute path='/customers/' component={Pages.Ticketed} />
-                <PrivateRoute path='/account/' exact component={Pages.Account} />
+                <PrivateRoute path='/account/' component={Pages.Account} />
                 <PrivateRoute path='/faq/' exact component={Pages.Faq} />
+                <PrivateRoute path='/payouts/' exact component={Pages.Payout} />
+                <PrivateRoute path='/campaigns/' exact component={Pages.Campaigns} />
 
                 <Route component={Pages.NotFound} />
             </Switch>
             <Switch>
-                <PrivateRoute path="/dashboard/:id/"  exact component={Pages.SingleApplication} />
-                <PrivateRoute path="/applications/:id/"  exact component={Pages.SingleApplication} />
-                <PrivateRoute path="/customers/:id/"  exact component={Pages.SingleApplication} />
-
+                <PrivateRoute path="/dashboard/:id/" exact component={Pages.SingleApplication} />
+                <PrivateRoute path="/applications/:id/" exact component={Pages.SingleApplication} />
+                <PrivateRoute path="/customers/:id/" exact component={Pages.SingleApplication} />
+                <PrivateRoute path="/account/verify-phone/" exact component={Pages.VerifyPhone} />
+                <PrivateRoute path="/account/add-bank/" exact component={Pages.AddBank} />
             </Switch>
         </Router>
     )

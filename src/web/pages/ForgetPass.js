@@ -1,10 +1,23 @@
+import cogoToast from 'cogo-toast';
 import React, { useState } from 'react';
+import { requestPasswordReset } from '../../services/auth';
 
 const ForgetPass = ({ history }) => {
-	const [loading] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = (e) => {
 		console.log(e)
+		e.preventDefault();
+		setLoading(true)
+		let { email } = e.target;
+		email = email.value;
+		requestPasswordReset({ email }).then((re) => {
+			cogoToast.warn(re.message, { position: 'top-right', hideAfter: 5 })
+		}).catch((er) => {
+			console.log(er)
+		}).finally(() => {
+			setLoading(false);
+		});
 	};
 
 	return (

@@ -28,7 +28,7 @@ const Client = ({ history }) => {
 								<p>Here's a quick overview of what is going on</p>
 							</div>
 							<div className="col-lg-6 col-md-12 align-self-center text-lg-end">
-								<Link to="/create-application/" className="btn btn-theme py-3 btn-block px-4 rounded-12 w-md-100">New Application</Link>
+								<Link to="/create-application/" className="btn btn-theme py-3 btn-block px-4 rounded-12 w-md-100 fs-14 ft-2">New Application</Link>
 							</div>
 						</div>
 
