@@ -3,7 +3,13 @@ import { BaseContainer } from '../layouts/Containers';
 import GTable, { TransactionsClass } from '../component/GTable';
 import { getTransactions } from '../../services/transactions';
 
-	
+
+
+
+
+
+
+
 const Payout = ({ history }) => {
 	const searchRef = useRef(null);
 	const [transactions, setTransactions] = useState([]);
@@ -17,7 +23,12 @@ const Payout = ({ history }) => {
 		})
 	}, []);
 
-    
+
+
+
+	
+
+
 	return (
 		<BaseContainer>
 			<div className="container mt-5">
