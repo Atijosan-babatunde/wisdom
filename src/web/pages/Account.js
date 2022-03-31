@@ -212,7 +212,7 @@ const Account = () => {
 		<BaseContainer>
 			<div className="container mt-5">
 				<div className="row">
-					<div className="col-xl-10 col-md-12 ps-md-5">
+					<div className="col-xl-12 col-md-12 ps-md-5">
 						<div className="row mb-3">
 							<h1 className="page-header mb-2 mt-3 fw-bolder">My Account</h1>
 							<p>Manage your account and payment information.</p>
@@ -622,6 +622,21 @@ const Account = () => {
 											</div>
 
 											<div className="tab-pane mt-3 ms-2 fade" id="pills-api" role="tabpanel" aria-labelledby="pills-api-tab">
+												<div className="container">
+
+													<div className="row">
+														<div className="bg-white min-vh-100 max-vh-100 p-5">
+															<div className="container">
+																<div className="text-center mt-4">
+																	<img className="mx-auto mb-5" src="/img/Q2BAOd2 1.svg" alt="" />
+																	<p className="fw-600 fs-22 ft-1 mb-3">Coming Soon</p>
+																	<p className="fs-14 ft-2">We are working on something awesome for you. Stay Tuned</p>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
 											</div>
 										</div>
 									</div>

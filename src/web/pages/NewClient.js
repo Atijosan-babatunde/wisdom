@@ -482,7 +482,7 @@ const NewClient = (
 		<BaseContainer>
 			<div className="container mt-5">
 				<div className="row">
-					<div className="col-xl-10 col-md-12 bg-white ps-md-5 pt-5 rounded">
+					<div className="col-xl-12 col-md-12 bg-white ps-md-5 pt-5 rounded">
 						<div className="row mb-5">
 							<h4 className="mb-1 fw-bolder">New Client Application</h4>
 							<p className="fs-14">Quickly create a new GoFlex Application for your customers</p>
