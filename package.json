@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.26.1",
     "cogo-toast": "^4.2.3",
     "datatables.net": "^1.11.3",
     "datatables.net-responsive-dt": "^2.2.9",
