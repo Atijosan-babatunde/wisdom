@@ -171,7 +171,7 @@ export default function Landing({ history }) {
 		<BaseContainer>
 			<div className="container mt-5">
 				<div className="row">
-					<div className="col-xl-10 col-md-12 ps-md-5">
+					<div className="col-xl-12 col-md-12 ps-md-5">
 
 						<div className="row mb-3" data-intro='Hello step one!' data-title="Welcome">
 							<h1 className="page-header mb-2 mt-3">Hey there, <span className="fw-bold">{user.firstName}</span><span> &#128075;&#127997;</span></h1>

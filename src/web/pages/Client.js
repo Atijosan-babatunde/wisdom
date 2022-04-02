@@ -21,7 +21,7 @@ const Client = ({ history }) => {
 		<BaseContainer>
 			<div className="container mt-5">
 				<div className="row">
-					<div className="col-xl-10 col-md-12 ps-md-5">
+					<div className="col-xl-12 col-md-12 ps-md-5">
 						<div className="row mb-3">
 							<div className="col-lg-6 col-md-12">
 								<h1 className="page-header mb-2 mt-3 fw-bolder">Client Application</h1>
