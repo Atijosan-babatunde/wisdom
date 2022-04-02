@@ -10,23 +10,23 @@ function Approuter({ history }) {
         <Router history={history}>
 
             <Switch>
-                <SessionRoute pathRedirect='/dashboard/' exact path='/' component={Pages.Authenticate} />
-                <SessionRoute pathRedirect='/dashboard/' path='/forgot-password/' exact component={Pages.ForgetPass} />
-                <SessionRoute pathRedirect='/dashboard/' path='/get-started/' exact component={Pages.CreateAccount} />
-                <SessionRoute pathRedirect='/dashboard/' path='/reset/:token/' exact component={Pages.ResetPassword} />
-                <SessionRoute pathRedirect='/business-information/' path='/verify-email/' exact component={Pages.EmailVerification} />
+                <Route pathRedirect='/dashboard/' exact path='/' component={Pages.Authenticate} />
+                <Route pathRedirect='/dashboard/' path='/forgot-password/' exact component={Pages.ForgetPass} />
+                <Route pathRedirect='/dashboard/' path='/get-started/' exact component={Pages.CreateAccount} />
+                <Route pathRedirect='/dashboard/' path='/reset/:token/' exact component={Pages.ResetPassword} />
+                <Route pathRedirect='/business-information/' path='/verify-email/' exact component={Pages.EmailVerification} />
 
-                <PrivateRoute path='/business-information/' exact component={Pages.UploadDocument} />
-                <PrivateRoute path='/bank-information/' exact component={Pages.EnterAccountDetails} />
-                <PrivateRoute path='/social-profile/' exact component={Pages.SocialAccount} />
-                <PrivateRoute path="/dashboard/" component={Pages.Landing} />
-                <PrivateRoute path='/applications/' component={Pages.Client} />
-                <PrivateRoute path='/create-application/' exact component={Pages.NewClient} />
-                <PrivateRoute path='/customers/' component={Pages.Ticketed} />
-                <PrivateRoute path='/account/' component={Pages.Account} />
-                <PrivateRoute path='/faq/' exact component={Pages.Faq} />
-                <PrivateRoute path='/payouts/' exact component={Pages.Payout} />
-                <PrivateRoute path='/campaigns/' exact component={Pages.Campaigns} />
+                <Route path='/business-information/' exact component={Pages.UploadDocument} />
+                <Route path='/bank-information/' exact component={Pages.EnterAccountDetails} />
+                <Route path='/social-profile/' exact component={Pages.SocialAccount} />
+                <Route path="/dashboard/" component={Pages.Landing} />
+                <Route path='/applications/' component={Pages.Client} />
+                <Route path='/create-application/' exact component={Pages.NewClient} />
+                <Route path='/customers/' component={Pages.Ticketed} />
+                <Route path='/account/' component={Pages.Account} />
+                <Route path='/faq/' exact component={Pages.Faq} />
+                <Route path='/payouts/' exact component={Pages.Payout} />
+                <Route path='/campaigns/' exact component={Pages.Campaigns} />
 
                 <Route component={Pages.NotFound} />
             </Switch>
