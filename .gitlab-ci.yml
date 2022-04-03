@@ -1,0 +1,25 @@
+cache:
+  paths:
+    - node_modules/
+stages:
+  - build
+  - test
+build:
+  image: node:10
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - ./build
+  only:
+    - development
+test:
+  image: node:10
+  stage: test
+  script:
+    - echo "Running react test suite......"
+    - npm run test
+  only:
+    - development
