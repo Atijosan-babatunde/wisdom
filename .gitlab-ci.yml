@@ -5,7 +5,7 @@ stages:
   - build
   - test
 build:
-  image: node:10
+  image: node:16
   stage: build
   script:
     - npm install
@@ -16,7 +16,7 @@ build:
   only:
     - development
 test:
-  image: node:10
+  image: node:16
   stage: test
   script:
     - echo "Running react test suite......"
