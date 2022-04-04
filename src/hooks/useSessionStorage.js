@@ -1,59 +1,34 @@
-// import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-// function getSessionStorageOrDefault(key, defaultValue) {
-//     const stored = sessionStorage.getItem(key);
-//     if (!stored) {
-//         return defaultValue;
-//     }
-//     return JSON.parse(stored);
-// }
-
-// export function useSessionStorage(key, defaultValue) {
-//     const [value, setValue] = useState(
-//         getSessionStorageOrDefault(key, defaultValue)
-//     );
-
-//     useEffect(() => {
-//         sessionStorage.setItem(key, JSON.stringify(value));
-//     }, [key, value]);
-
-//     return [value, setValue];
-// }
-
-import { useState } from 'react';
-
-export function useSessionStorage(key, initialValue) {
-    
-    const [storedValue, setStoredValue] = useState(() => {
+export const useSessionStorage = (key, initialValue, raw) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [state, setState] = useState(() => {
         try {
-            // Get from local storage by key
-            const item = window.sessionStorage.getItem(key);
-            const valueToReturn = item && item !== null ? typeof item === "object" ? JSON.parse(item) : item : initialValue;
-            console.log(key, valueToReturn);
-            window.sessionStorage.setItem(key, valueToReturn);
-            // Parse stored json or if none return initialValue
-            return valueToReturn;
-        } catch (error) {
-            // If error also return initialValue
-            console.log(error);
+            const sessionStorageValue = sessionStorage.getItem(key);
+            if (typeof sessionStorageValue !== 'string') {
+                sessionStorage.setItem(key, raw ? String(initialValue) : JSON.stringify(initialValue));
+                return initialValue;
+            } else {
+                return raw ? sessionStorageValue : JSON.parse(sessionStorageValue || 'null');
+            }
+        } catch {
+            // If user is in private mode or has storage restriction
+            // sessionStorage can throw. JSON.parse and JSON.stringify
+            // can throw, too.
             return initialValue;
         }
     });
 
-    const setValue = (value) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
         try {
-            // Allow value to be a function so we have same API as useState
-            const valueToStore =
-                value instanceof Function ? value(storedValue) : value;
-            // Save state
-            setStoredValue(valueToStore);
-            // Save to local storage
-            window.sessionStorage.setItem(key, typeof valueToStore === "object" ? JSON.stringify(valueToStore) : valueToStore);
-        } catch (error) {
-            // A more advanced implementation would handle the error case
-            console.log(error);
+            const serializedState = raw ? String(state) : JSON.stringify(state);
+            sessionStorage.setItem(key, serializedState);
+        } catch {
+            // If user is in private mode or has storage restriction
+            // sessionStorage can throw. Also JSON.stringify can throw.
         }
-    };
+    });
 
-    return [storedValue, setValue];
-}
+    return [state, setState];
+};
