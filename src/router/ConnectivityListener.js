@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import cogoToast from 'cogo-toast';
 
 export default function ConnectivityListener (ComposedComponent) {
     class ConnectivityListener extends Component {

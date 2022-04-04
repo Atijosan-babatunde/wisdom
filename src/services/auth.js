@@ -59,7 +59,6 @@ export const requestPasswordReset = (data) => {
 }
 
 export const verifyOTP = (props) => {
-    console.log(props)
     return new Promise((resolve, reject) => {
         return fetch(`${process.env.REACT_APP_BASE_API}/otp/`, {
             headers: {
@@ -73,7 +72,6 @@ export const verifyOTP = (props) => {
         }).then((data) => {
             resolve(data)
         }).catch((err) => {
-            console.log(err);
             reject(err);
         })
     })
@@ -92,7 +90,6 @@ export const resendOTP = (props) => {
         }).then((data) => {
             resolve(data)
         }).catch((err) => {
-            console.log(err);
             reject(err);
         })
     })
