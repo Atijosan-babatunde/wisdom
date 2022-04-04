@@ -67,6 +67,7 @@ const Account = () => {
 			if (res.status === HttpStatus.OK) {
 				setDefaultNuban(res.payload.find(v => v.isPrimary) || {})
 				setNubans(res.payload)
+				console.log("NUBANS", res.payload)
 			}
 			// Show error
 		}).catch(() => {
