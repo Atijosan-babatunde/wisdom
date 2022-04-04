@@ -17,35 +17,36 @@ export default function ConnectivityListener (ComposedComponent) {
         }
 
         handleConnectionChange = () => {
-            const condition = window ? window.navigator.onLine : false;
-            if (condition) {
-                const webPing = setInterval(() => {
-                    fetch(`${process.env.REACT_APP_BASE_API}`, {
-                        mode: 'no-cors',
-                    }).then(() => {
-                        this.setState({ isOffline: false }, () => {
-                            if (!this.state.isOffline && this.state.hide) this.state.hide();
-                            this.setState({ hide: null }, () => {
-                                clearInterval(webPing);
-                            })
-                        })
-                    }).catch(() => {
-                        if (!this.state.isOffline) {
-                            this.setState({ isOffline: true }, () => {
-                                const { hide } = cogoToast.warn("Unable to reach web service", { hideAfter: 0, position: "top-center" })
-                                this.setState({ hide: hide })
-                            });
-                        }
-                    })
-                }, 2000);
-                return;
-            } else {
-                this.setState({ isOffline: true }, () => {
-                    const { hide } = cogoToast.error("No internet connection", { hideAfter: 0, position: "top-center" })
-                    this.setState({ hide: hide })
-                });
-                return;
-            }
+            console.log('Connection Change');
+            // const condition = window ? window.navigator.onLine : false;
+            // if (condition) {
+            //     const webPing = setInterval(() => {
+            //         fetch(`${process.env.REACT_APP_BASE_API}`, {
+            //             mode: 'no-cors',
+            //         }).then(() => {
+            //             this.setState({ isOffline: false }, () => {
+            //                 if (!this.state.isOffline && this.state.hide) this.state.hide();
+            //                 this.setState({ hide: null }, () => {
+            //                     clearInterval(webPing);
+            //                 })
+            //             })
+            //         }).catch(() => {
+            //             if (!this.state.isOffline) {
+            //                 this.setState({ isOffline: true }, () => {
+            //                     const { hide } = cogoToast.warn("Unable to reach web service", { hideAfter: 0, position: "top-center" })
+            //                     this.setState({ hide: hide })
+            //                 });
+            //             }
+            //         })
+            //     }, 2000);
+            //     return;
+            // } else {
+            //     this.setState({ isOffline: true }, () => {
+            //         const { hide } = cogoToast.error("No internet connection", { hideAfter: 0, position: "top-center" })
+            //         this.setState({ hide: hide })
+            //     });
+            //     return;
+            // }
         }
 
 

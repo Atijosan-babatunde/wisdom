@@ -26,21 +26,6 @@ export default function Landing({ history }) {
 	const [progress, setProgress] = useState(0);
 	const [loading, setLoading] = useState(false);
 
-	const rf = useCallback(() => {
-		console.log("USE RF CALLBACK")
-		if ((user && Object.keys(user).length <= 0) || (merchant && Object.keys(merchant).length <= 0)) {
-			getMerchantProfile().then((res) => {
-				if (res.status === HttpStatus.OK) {
-					setUser(res.payload.user)
-					setMerchant(res.payload.merchant)
-				}
-				// else Logout
-			}).catch(() => {
-				// Logout
-			})
-		}
-	}, [merchant, user, setUser, setMerchant]);
-
 	const openBanner = useCallback(() => {
 		console.log("OPEN MODAL CALLBACK")
 		var myModal = new window.bootstrap.Modal(document.getElementById('welcomeModal'), {
@@ -56,7 +41,7 @@ export default function Landing({ history }) {
 			myModal.hide();
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [showBanner]);
 
 	function uploadLogo(e) {
 		if (e.target.files.length > 0 && e.target.files.length === 1) {
@@ -126,12 +111,6 @@ export default function Landing({ history }) {
 	// TODO: Change to Promise.all
 
 	useEffect(() => {
-		console.log("USE RF")
-		rf();
-	}, [rf]);
-
-	useEffect(() => {
-		console.log("OPEN BANNER")
 		openBanner()
 	}, [openBanner]);
 
