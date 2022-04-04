@@ -3,7 +3,6 @@ cache:
     - node_modules/
 stages:
   - build
-  - test
 build:
   image: node:16
   stage: build
@@ -13,13 +12,5 @@ build:
   artifacts:
     paths:
       - ./build
-  only:
-    - development
-test:
-  image: node:16
-  stage: test
-  script:
-    - echo "Running react test suite......"
-    - npm run test
   only:
     - development
