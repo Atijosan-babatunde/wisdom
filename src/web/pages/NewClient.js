@@ -196,6 +196,7 @@ function TripDetails({ onNext }) {
 	const [tripType, setTripType] = useState("round_trip");
 	const [bookingType, setBookingType] = useState("flight");
 	const [airports, setAirports] = useState([]);
+	const [selected, setSelected] = useState(null);
 
 	function compare( a, b ) {
 		if ( a.name < b.name ){
@@ -238,6 +239,11 @@ function TripDetails({ onNext }) {
 		setTripType(trip_type);
 	}
 
+	function handleFromChange(e) {
+		const { value } = e.target;
+		setSelected(value);
+	}
+
 	return (
 		<form onSubmit={submit}>
 			<div className="row mb-4">
@@ -278,7 +284,7 @@ function TripDetails({ onNext }) {
 				<div className="row mb-4">
 					<div className="col-md-6">
 						<label htmlFor="inputCountry" className="form-label fw-bold">FROM</label>
-						<select name="fromIataCode" defaultValue="" className="select2 form-select form-select-0 ps-3 py-3 text-light text-dark" required>
+						<select name="fromIataCode" onChange={handleFromChange} defaultValue="" className="select2 form-select form-select-0 ps-3 py-3 text-light text-dark" required>
 							<option value="" disabled>Select City</option>
 							{airports && airports.sort(compare).map((v) => {
 								return <option key={v.icao_code} value={v.iata_code}>{v.name}</option>
@@ -289,7 +295,7 @@ function TripDetails({ onNext }) {
 						<label htmlFor="inputCountry" className="form-label fw-bold">TO</label>
 						<select name="toIataCode" id="inputCity" className="form-select form-select-0 ps-3 py-3 text-light text-dark" required>
 							<option>Select City</option>
-							{airports && airports.sort(compare).map((v) => {
+							{airports && airports.filter(v => v.iata_code !== selected).sort(compare).map((v) => {
 								return <option key={v.icao_code} value={v.iata_code}>{v.name}</option>
 							})}
 						</select>
