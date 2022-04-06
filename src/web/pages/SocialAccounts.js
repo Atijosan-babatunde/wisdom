@@ -64,7 +64,7 @@ export default function SocialAccount({ history }) {
                             <div className="col mb-3">
                                 <div className="input-group">
                                     <span className="input-group-text input-group-text-0 fs-22"><i className="fa-brands fa-instagram fs-18 border-end-0"></i></span>
-                                    <input type="text" placeholder="https://www.instagram.com/" defaultValue={merchant?.instagramBusiness} className="form-control form-control-0 ps-3 py-3 border-start-0" name="instagram" />
+                                    <input type="text" placeholder="@brand_name" defaultValue={merchant?.instagramBusiness} className="form-control form-control-0 ps-3 py-3 border-start-0" name="instagram" />
                                 </div>
                             </div>
 
