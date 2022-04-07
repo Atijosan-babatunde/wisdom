@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
-import { fetchCookie } from '../helpers/cookie';
+import { fetchCookie, removeCookie } from '../helpers/cookie';
+import { useSessionStorage } from '../hooks/useSessionStorage';
+import { getMerchantProfile } from '../services/users';
 import * as Pages from '../web/pages';
 import ConnectivityListener from './ConnectivityListener';
 
@@ -44,13 +46,57 @@ function Approuter({ history }) {
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const auth = {
-        isAuthenticated: fetchCookie('1Q_SPA') ? true : false,
+    const [user, setUser] = useSessionStorage('user', {});
+    const [merchant, setMerchant] = useSessionStorage('merchant', {});
+    const [loading, setLoading] = useState(false);
+
+    const auth = useMemo(() => {
+        return { isAuthenticated: fetchCookie('1Q_SPA') ? true : false }
+    }, []);
+
+    useEffect(() => {
+        if (auth.isAuthenticated && (Object.keys(user).length <= 0 || Object.keys(merchant).length <= 0)) {
+            setLoading(true)
+            getMerchantProfile().then((re) => {
+                const { payload: { user: u, merchant: m } } = re;
+                setUser(u);
+                setMerchant(m)
+                console.log("Roiter", re);
+
+            }).catch((error) => {
+                console.log(error)
+                removeCookie('1Q_SPA');
+                auth.isAuthenticated = false;
+            }).finally(() => {
+                setLoading(false);
+            });
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setUser, setMerchant, auth])
+
+
+
+    if (loading) {
+        return (<div className="text-center mx-auto justify-content-center">
+            <p>Loading...</p>
+        </div>)
     }
 
-    // Use getMerchant profile here in combination with useSessionstorage to persist user data
 
-    // if (auth.isAuthenticated && auth.isAuthorized === 'false') removeCookie('token')
+    // useEffect(() => {
+    //     if (auth.isAuthenticated && (Object.keys(user).length <= 0)) {
+    //         console.log("YAY");
+    //         getMerchantProfile().then((re) => {
+    //             const { payload: { user: u, merchant: m } } = re;
+    //             setUser(u);
+    //             // setPersistentUser(user)
+    //         }).catch(() => {
+    //             auth.isAuthenticated = false;
+    //             removeCookie('token');
+    //         })
+    //     }
+    // }, [user, setUser, auth])
+
     return (
         <Route {...rest} render=
             {props => auth.isAuthenticated ?

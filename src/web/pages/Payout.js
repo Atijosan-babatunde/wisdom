@@ -14,7 +14,6 @@ import { HttpStatus } from "../../helpers/constants";
 const Payout = ({ history }) => {
 	const searchRef = useRef(null);
 	const [transactions, setTransactions] = useState([]);
-	const [nubans, setNubans] = useState([]);
 	const [defaultNuban, setDefaultNuban] = useState({});
 
 	useEffect(() => {
@@ -31,8 +30,6 @@ const Payout = ({ history }) => {
 			console.log("NUBAN", res.payload)
 			if (res.status === HttpStatus.OK) {
 				setDefaultNuban(res.payload.find(v => v.isPrimary) || {})
-				setNubans(res.payload)
-				
 			}
 			// Show error
 		}).catch(() => {
@@ -123,7 +120,6 @@ const Payout = ({ history }) => {
 									</div>
 								</div>
 							</div> 
-
 							<div className="col-4">
 							   
 								<div className="card mb-2 border-0 shadow-sm" data-intro='Customers'>
@@ -144,7 +140,6 @@ const Payout = ({ history }) => {
 								</div>
 							
 							</div>
-                         
 						</div>
 
 						<div className="row">
