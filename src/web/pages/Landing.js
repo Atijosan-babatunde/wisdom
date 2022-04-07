@@ -1,23 +1,22 @@
 // import introJs from 'intro.js';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import cogoToast from 'cogo-toast';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HttpStatus } from '../../helpers/constants';
-import { useSessionStorage } from '../../hooks/useSessionStorage';
+import { formatCurrency } from '../../helpers/util';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
 import { getApplications } from '../../services/application';
 import { getCustomers } from '../../services/customers';
-import { getMerchantProfile } from '../../services/users';
+import { updateMerchant } from '../../services/merchsnts';
 import { BaseContainer } from '../../web/layouts/Containers';
 import GTable, { ApplicationsClass } from '../component/GTable';
-import cogoToast from 'cogo-toast';
-import { updateMerchant } from '../../services/merchsnts';
-import { formatCurrency } from '../../helpers/util';
 
 export default function Landing({ history }) {
 	const searchRef = useRef(null);
 	const [customers, setCustomers] = useState([]);
 	const [applications, setApplications] = useState([]);
-	const [user, setUser] = useSessionStorage("user", {});
+	const [user] = useSessionStorage("user", {});
 	const [merchant, setMerchant] = useSessionStorage("merchant", {});
 	const [step, setStep] = useState(0)
 	const [showBanner, setShowBanner] = useLocalStorage("showBanner", "true");
@@ -25,21 +24,6 @@ export default function Landing({ history }) {
 	const [file, setFile] = useState(null);
 	const [progress, setProgress] = useState(0);
 	const [loading, setLoading] = useState(false);
-
-	const rf = useCallback(() => {
-		console.log("USE RF CALLBACK")
-		if ((user && Object.keys(user).length <= 0) || (merchant && Object.keys(merchant).length <= 0)) {
-			getMerchantProfile().then((res) => {
-				if (res.status === HttpStatus.OK) {
-					setUser(res.payload.user)
-					setMerchant(res.payload.merchant)
-				}
-				// else Logout
-			}).catch(() => {
-				// Logout
-			})
-		}
-	}, [merchant, user, setUser, setMerchant]);
 
 	const openBanner = useCallback(() => {
 		console.log("OPEN MODAL CALLBACK")
@@ -56,7 +40,7 @@ export default function Landing({ history }) {
 			myModal.hide();
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [showBanner]);
 
 	function uploadLogo(e) {
 		if (e.target.files.length > 0 && e.target.files.length === 1) {
@@ -126,30 +110,20 @@ export default function Landing({ history }) {
 	// TODO: Change to Promise.all
 
 	useEffect(() => {
-		console.log("USE RF")
-		rf();
-	}, [rf]);
-
-	useEffect(() => {
-		console.log("OPEN BANNER")
 		openBanner()
 	}, [openBanner]);
 
 	useEffect(() => {
 		getCustomers().then((e) => {
-			console.log(e)
 			setCustomers(e.payload)
 		}).catch((ex) => {
-			console.log(ex)
 		})
 	}, []);
 
 	useEffect(() => {
 		getApplications().then(e => {
-			console.log(e);
 			setApplications(e.payload);
 		}).catch((ex) => {
-			console.log(ex);
 		})
 	}, [])
 
@@ -157,7 +131,6 @@ export default function Landing({ history }) {
 		ev.preventDefault();
 		setLoading(true)
 		const payload = Object.fromEntries(new FormData(ev.target));
-		console.log(payload)
 		updateMerchant(payload).then((re) => {
 			if (re.status === HttpStatus.OK) {
 				// update merchant
@@ -169,7 +142,6 @@ export default function Landing({ history }) {
 				cogoToast.error(re.message)
 			}
 		}).catch((e) => {
-			console.log(e)
 		}).finally(() => {
 			setLoading(false)
 			// Stop loader

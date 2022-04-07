@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import GTable, { ApplicationsClass } from '../component/GTable';
 import { BaseContainer } from '../layouts/Containers';
 
 const Client = ({ history }) => {
