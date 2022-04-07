@@ -1,42 +1,42 @@
-// import { Fragment, useEffect, useState } from "react";
-// import { useSessionStorage } from "../../hooks/useSessionStorage";
-// import { resendOTP } from "../../services/auth";
+import { Fragment, useEffect, useState } from "react";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
+import { resendOTP } from "../../services/auth";
 
 export default function VerifyPhone({ history }) {
-    // const [loading, setLoading] = useState(false);
-    // const [user] = useSessionStorage("user", {});
+    const [loading, setLoading] = useState(false);
+    const [user] = useSessionStorage("user", {});
 
     function closeModal() {
         history.goBack();
     }
 
-    // useEffect(() => {
-    //     var myModal = new window.bootstrap.Modal(document.getElementById('staticBackdrop'), {
-    //         keyboard: false
-    //     });
-    //     if (user && typeof user === "object" && Object.keys(user).length > 0 && !user?.isPhoneVerified) {
-    //         myModal.show()
-    //         setLoading(true)
-    //         resendOTP().then(() => {
+    useEffect(() => {
+        var myModal = new window.bootstrap.Modal(document.getElementById('staticBackdrop'), {
+            keyboard: false
+        });
+        if (user && typeof user === "object" && Object.keys(user).length > 0 && !user?.isPhoneVerified) {
+            myModal.show()
+            setLoading(true)
+            resendOTP().then(() => {
 
-    //         }).catch(() => {
+            }).catch(() => {
 
-    //         }).finally(() => {
-    //             setLoading(false)
-    //         })
-    //     } else {
-    //         closeModal();
-    //     }
+            }).finally(() => {
+                setLoading(false)
+            })
+        } else {
+            closeModal();
+        }
 
-    //     return (() => {
-    //         myModal.hide();
-    //     })
-    // }, [])
+        return (() => {
+            myModal.hide();
+        })
+    }, [])
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     // Check if is verified from 
-    // }, [])
+        // Check if is verified from 
+    }, [])
 
     return (
         <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -10,6 +10,8 @@ import { HttpStatus } from '../../helpers/constants';
 import FormWizard from '../component/FormWizard';
 import { Province } from '../../helpers/util';
 
+
+
 function ShareApplication({ reference }) {
 	const linkRef = useRef(null);
 
@@ -196,6 +198,7 @@ function TripDetails({ onNext }) {
 	const [tripType, setTripType] = useState("round_trip");
 	const [bookingType, setBookingType] = useState("flight");
 	const [airports, setAirports] = useState([]);
+	
 
 	function compare( a, b ) {
 		if ( a.name < b.name ){
@@ -237,6 +240,9 @@ function TripDetails({ onNext }) {
 		const { value: trip_type } = e.target;
 		setTripType(trip_type);
 	}
+	
+
+  
 
 	return (
 		<form onSubmit={submit}>
@@ -286,7 +292,7 @@ function TripDetails({ onNext }) {
 						</select>
 					</div>
 					<div className="col-md-6">
-						<label htmlFor="inputCountry" className="form-label fw-bold">TO</label>
+						<label htmlFor="inputCountry"  className="form-label fw-bold">TO</label>
 						<select name="toIataCode" id="inputCity" className="form-select form-select-0 ps-3 py-3 text-light text-dark" required>
 							<option>Select City</option>
 							{airports && airports.sort(compare).map((v) => {

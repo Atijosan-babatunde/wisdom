@@ -11,6 +11,7 @@ import { getNubans } from "../../services/nuban";
 import { updateMerchant } from "../../services/merchsnts";
 import { Link } from "react-router-dom";
 
+
 const Account = () => {
 	const [user, setUser] = useSessionStorage("user", {});
 	const [updating, setUpdating] = useState(false)
@@ -26,6 +27,7 @@ const Account = () => {
 	const [uploadActive, setUploadActive] = useState(false);
 	const [file, setFile] = useState(null);
 	const [progress, setProgress] = useState(0)
+	
 
 	useEffect(() => {
 		if (
@@ -78,6 +80,23 @@ const Account = () => {
 		})
 	}, [])
 
+	// useEffect(() => {
+    //     var myModal = new window.bootstrap.Modal(document.getElementById('verifyModal'), {
+    //         keyboard: false
+    //     });
+
+    //     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    //     tooltipTriggerList.map(function (tooltipTriggerEl) {
+    //         return new window.bootstrap.Tooltip(tooltipTriggerEl)
+    //     })
+
+    //     myModal.show()
+
+    //     return (() => {
+    //         myModal.hide();
+    //     })
+    // }, [])
+
 	const updateBusinessInfo = (ev) => {
 		ev.preventDefault()
 		setUpdating(true)
@@ -99,6 +118,8 @@ const Account = () => {
 			// Stop loader
 		})
 	}
+
+	
 
 	function uploadLogo(e) {
 		if (e.target.files.length > 0 && e.target.files.length === 1) {
@@ -304,6 +325,27 @@ const Account = () => {
 														</button>
 													</div>
 												</form>
+
+												{/* <div className="modal fade" id="verifyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+													
+														<div className="modal-dialog modal-dialog-centered" style={{ maxWidth: 800 }}>
+															<div className="modal-content rounded-12">
+																<div className="modal-header border-0">
+																	<button type="button" className="btn-close fs-10 mt-2 me-3 z-index-3" data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div className="modal-body">
+																	<div className="col-12 d-none d-md-block" style={{ marginTop: "-15em" }}>
+																		<img src="/img/welcome.png" alt="welcome" />
+																	</div>
+
+                                                                     <h3>verify Now</h3>
+
+																</div>
+															</div>
+														</div>
+													
+												</div> */}
 											</div>
 
 											<div className="tab-pane mt-3 ms-2 fade" id="pills-businessinfo" role="tabpanel" aria-labelledby="pills-businessinfo-tab">

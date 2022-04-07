@@ -59,7 +59,7 @@ export default function Authenticate({ history }) {
 			}
 			cogoToast.error(re.message, { position: "top-right", hideAfter: 5 })
 		}).catch((er) => {
-			console.log(er)
+			console.log({er})
 		}).finally(() => {
 			console.log(token)
 			setLoading(false);
